@@ -43,9 +43,7 @@ public class JsonEntityDaoImpl implements JsonEntityDao {
         KeyHolder pk = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource()
                 .addValue("id", jsonEntity.getId())
-                .addValue("plain_json", jsonEntity.getPlain_json())
-                .addValue("binary_json", jsonEntity.getBinary_json());
-
+                .addValue("plain_json", jsonEntity.getPlain_json());
         template.update(sql, param, pk);
     }
 }

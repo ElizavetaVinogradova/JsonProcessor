@@ -14,7 +14,6 @@ public class JsonEntityRowMapper implements RowMapper<JsonEntity> {
         JsonEntity jsonEntity = new JsonEntity();
         jsonEntity.setId(rs.getLong("id"));
         jsonEntity.setPlain_json(rs.getString("plain_json"));
-        jsonEntity.setBinary_json(rs.getString("binary_json"));
 
         return jsonEntity;
     }
