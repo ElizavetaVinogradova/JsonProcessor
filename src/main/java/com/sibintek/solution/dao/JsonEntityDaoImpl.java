@@ -38,7 +38,7 @@ public class JsonEntityDaoImpl implements JsonEntityDao {
 
     @Override
     public void insertJsonEntity(JsonEntity jsonEntity) {
-        final String sql = "insert into sibintek(plain_json, binary_json) values(cast(:plain_json as json), cast(:binary_json as json))";
+        final String sql = "insert into sibintek(plain_json) values(cast(:plain_json as json))";
 
         KeyHolder pk = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource()

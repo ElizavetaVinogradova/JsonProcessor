@@ -11,7 +11,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JsonEntity implements Serializable {
-
     private Long id;
     private String plain_json;
 }
