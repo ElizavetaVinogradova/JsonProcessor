@@ -23,12 +23,12 @@ public class JsonEntityRowMapper implements RowMapper<Map<String, Object>> {
     }
 
     @Override
-    public Map<String, Object> mapRow(ResultSet rs, int arg) throws SQLException {
+    public Map<String, Object> mapRow(ResultSet rs, int arg) throws SQLException{
         try {
-            return mapper.readValue(rs.getString("plain_json"), new TypeReference<Map<String, Object>>(){});
+            return mapper.readValue(rs.getString("plain_json"), new TypeReference<Map<String, Object>>() {});
         } catch (JsonProcessingException e) {
-            log.error("Could not read value from DB");
+            e.printStackTrace();
         }
-        return new HashMap<>(); //хз пока что тут вернуть
+        return new HashMap<>();
     }
 }
