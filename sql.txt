@@ -1,0 +1,32 @@
+-- Создать таблицу
+CREATE TABLE sibintek (
+    id serial not null,
+    plain_json json
+);
+
+
+INSERT INTO sibintek (plain_json) VALUES
+('{"id": "782622566",
+    "old_values":
+        {
+        "currentDate":"2020-11-27T00:00:00+03:00",
+        "value" : "Здравствуй, Татьяна, я - Евгений"
+        },
+    "new_values":
+        {
+        "currentDate":"2020-11-30T00:00:00+03:00",
+         "value" : "Здравствуй, лошадь, я - Пржевальский"
+        },
+    "lastUpdateUser" : "admin"
+   }');
+
+
+INSERT INTO sibintek (plain_json) VALUES
+('{
+  "firstName" : "Elizaveta",
+  "lastName" : "Vinogradova",
+  "bd" : "26-05-1990",
+  "favouriteColors" : "Red, green, white"
+  }');
+
+

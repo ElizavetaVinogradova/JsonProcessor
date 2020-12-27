@@ -26,7 +26,7 @@ public class JsonEntityDaoImpl implements JsonEntityDao {
 
     @Override
     public List<Map<String, Object>> findAll() {
-        return template.query("select * from sibintek", new JsonEntityRowMapper()); //У меня нет такого конструктора в классе!
+        return template.query("select * from sibintek", new JsonEntityRowMapper());
     }
 
     @Override
