@@ -1,6 +1,7 @@
 package com.sibintek.solution.dao;
 
-import com.sibintek.solution.entity.JsonEntity;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sibintek.solution.mapper.JsonEntityRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,19 +16,21 @@ import java.util.Map;
 
 @Repository
 public class JsonEntityDaoImpl implements JsonEntityDao {
+    private ObjectMapper mapper;
     private NamedParameterJdbcTemplate template;
 
     public JsonEntityDaoImpl(NamedParameterJdbcTemplate template) {
         this.template = template;
+        mapper = new ObjectMapper();
     }
 
     @Override
-    public List<JsonEntity> findAll() {
-        return template.query("select * from sibintek", new JsonEntityRowMapper());
+    public List<Map<String, Object>> findAll() {
+        return template.query("select * from sibintek", new JsonEntityRowMapper()); //У меня нет такого конструктора в классе!
     }
 
     @Override
-    public JsonEntity findById(Long id) {
+    public Map<String, Object> findById(Long id) {
         final Map<String, Object> params = new HashMap<>();
         params.put("id", id);
         return template.queryForObject(
@@ -37,13 +40,13 @@ public class JsonEntityDaoImpl implements JsonEntityDao {
     }
 
     @Override
-    public void insertJsonEntity(JsonEntity jsonEntity) {
+    public void insertJsonEntity(Map<String, Object> request) throws JsonProcessingException {
         final String sql = "insert into sibintek(plain_json) values(cast(:plain_json as json))";
-
+        String convertedRequest = mapper.writeValueAsString(request);
         KeyHolder pk = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource()
-                .addValue("id", jsonEntity.getId())
-                .addValue("plain_json", jsonEntity.getPlain_json());
+                .addValue("id", request.get("id"))
+                .addValue("plain_json", convertedRequest);
         template.update(sql, param, pk);
     }
 }
