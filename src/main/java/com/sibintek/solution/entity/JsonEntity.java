@@ -5,14 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
+import java.util.Map;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class JsonEntity implements Serializable {
+
     private Long id;
-    private String plain_json;
+    private Map<String, Object> plain_json;
 }
 
 
